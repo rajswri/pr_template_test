@@ -26,16 +26,16 @@ jobs:
 
             if (missing.length > 0) {
               const message = `
-⚠️ **PR Template Check Failed**
+                    ⚠️ **PR Template Check Failed**
+                    
+                    Hi @${context.payload.pull_request.user.login}, your PR description is missing the following required section(s):
+                    
+                    ${missing.map(s => `- ${s}`).join('\n')}
+                    
+                    Please update the description to follow the [PR Template](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/.github/pull_request_template.md) format.
 
-Hi @${context.payload.pull_request.user.login}, your PR description is missing the following required section(s):
-
-${missing.map(s => `- ${s}`).join('\n')}
-
-Please update the description to follow the [PR Template](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/.github/pull_request_template.md) format.
-
-Thank you! 🙌
-              `;
+                    Thank you! 🙌
+                                  `;
 
               await github.rest.issues.createComment({
                 issue_number: context.issue.number,
